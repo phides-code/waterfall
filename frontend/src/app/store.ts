@@ -2,12 +2,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import categoryReducer from '../features/category/categorySlice';
 import departmentsReducer from '../features/departments/departmentsSlice';
+import randomObjectsReducer from '../features/randomObjects/randomObjectsSlice';
 
 export const store = configureStore({
     reducer: {
         counter: counterReducer,
         category: categoryReducer,
         departments: departmentsReducer,
+        randomObjects: randomObjectsReducer,
     },
 });
 

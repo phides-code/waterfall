@@ -1,51 +1,51 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
-export interface Department {
-    departmentId: number;
-    displayName: string;
-    picture: string;
+export interface RandomObject {
+    randomObjectData: any;
 }
 
 interface FetchResponseType {
     httpStatus: number;
-    data: Department[];
+    data: RandomObject[];
 }
 
-export interface DepartmentsState {
+export interface RandomObjectsState {
     value: FetchResponseType;
     status: 'idle' | 'loading' | 'failed';
 }
 
-const initialState: DepartmentsState = {
+const initialState: RandomObjectsState = {
     value: { httpStatus: 200, data: [] },
     status: 'idle',
 };
 
-export const fetchDepartments = createAsyncThunk(
-    'departments/fetchDepartments',
+export const fetchRandomObjects = createAsyncThunk(
+    'randomObjects/fetchRandomObjects',
 
-    async () => {
-        const rawFetchResponse = await fetch('/api/getdepartments');
+    async (departmentId: number) => {
+        const rawFetchResponse = await fetch(
+            `/api/getrandomobjects/${departmentId}`
+        );
         const fetchResponse: FetchResponseType = await rawFetchResponse.json();
 
         return fetchResponse;
     }
 );
 
-export const departmentsSlice = createSlice({
-    name: 'departments',
+export const randomObjectsSlice = createSlice({
+    name: 'randomObjects',
     initialState,
     reducers: {},
     extraReducers(builder) {
         builder
-            .addCase(fetchDepartments.pending, (state) => {
+            .addCase(fetchRandomObjects.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchDepartments.rejected, (state) => {
+            .addCase(fetchRandomObjects.rejected, (state) => {
                 state.status = 'failed';
             })
-            .addCase(fetchDepartments.fulfilled, (state, action) => {
+            .addCase(fetchRandomObjects.fulfilled, (state, action) => {
                 const { httpStatus, data } = action.payload;
                 state.status = 'idle';
                 state.value = {
@@ -56,6 +56,6 @@ export const departmentsSlice = createSlice({
     },
 });
 
-export const selectDepartments = (state: RootState) => state.departments;
+export const selectRandomObjects = (state: RootState) => state.randomObjects;
 
-export default departmentsSlice.reducer;
+export default randomObjectsSlice.reducer;

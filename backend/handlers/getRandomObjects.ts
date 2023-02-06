@@ -7,23 +7,6 @@ interface ObjectList {
 
 const NUM_OF_OBJECTS = 2;
 
-// const getRandomIndexes = (max: number): number[] => {
-//     const randomIndexes: number[] = [];
-
-//     for (let i = 0; i < NUM_OF_OBJECTS; i++) {
-//         const thisRandomIndex = Math.floor(Math.random() * max);
-
-//         if (randomIndexes.includes(thisRandomIndex)) {
-//             i--;
-//             continue;
-//         }
-
-//         randomIndexes.push(thisRandomIndex);
-//     }
-
-//     return randomIndexes;
-// };
-
 const fetchObject = async (objectID: number) => {
     const response = await fetch(
         `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
@@ -42,14 +25,22 @@ const fetchRandomObjects = async (allObjects: ObjectList) => {
 
         const result = await fetchObject(objectIDs[randomIndex]);
 
-        if (randomObjects.includes(result) || result.primaryImageSmall === '') {
+        // if this result has already been added or if doesn't have a primaryImageSmall, pick again
+        if (
+            result.primaryImageSmall !== null &&
+            typeof result.primaryImageSmall === 'string' &&
+            /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(
+                result.primaryImageSmall
+            )
+        ) {
+            console.log('adding random object to array position ' + i);
+            console.log('got primaryImageSmall: ' + result.primaryImageSmall);
+            randomObjects.push(result);
+        } else {
             console.log('*** redoing random selection ***');
             i--;
             continue;
         }
-        console.log('adding random object to array position ' + i);
-        console.log('got primaryImageSmall: ' + result.primaryImageSmall);
-        randomObjects.push(result);
     }
 
     return randomObjects;
@@ -62,15 +53,14 @@ const getRandomObjects = async (req: Request, res: Response) => {
 
     try {
         // get all objectIDs for given department
+        // const fetchResponse = await fetch(
+        //     `https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&hasImages=true&departmentId=${departmentId}&q=""`
+        // );
         const fetchResponse = await fetch(
-            `https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&hasImages=true&departmentId=${departmentId}&q=""`
+            `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&departmentId=${departmentId}&q=""`
         );
 
         const allObjects: ObjectList = await fetchResponse.json();
-        // const { total, objectIDs } = allObjects;
-
-        // get random indexes
-        // const randomIndexes = getRandomIndexes(total);
 
         // do a fetch on each number and get back an array
         const randomObjects = await fetchRandomObjects(allObjects);

@@ -30,11 +30,11 @@ const Departments = () => {
 
             <Wrapper>
                 {departments.map((department) => (
-                    <Link to={`/department/${department.departmentId}`}>
-                        <DepartmentIcon
-                            key={department.departmentId}
-                            department={department}
-                        />
+                    <Link
+                        to={`/department/${department.departmentId}`}
+                        key={department.departmentId}
+                    >
+                        <DepartmentIcon department={department} />
                     </Link>
                 ))}
             </Wrapper>
