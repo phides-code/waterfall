@@ -58,4 +58,14 @@ export const departmentsSlice = createSlice({
 
 export const selectDepartments = (state: RootState) => state.departments;
 
+export const selectDepartmentById = (
+    state: RootState,
+    departmentId: number
+) => {
+    const departments = state.departments.value.data;
+    return departments.find(
+        (department) => department.departmentId === departmentId
+    )?.displayName;
+};
+
 export default departmentsSlice.reducer;

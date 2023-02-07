@@ -21,7 +21,7 @@ const Departments = () => {
     }, [dispatch]);
 
     if (isLoading) {
-        return <CircularProgress />;
+        return <CircularProgress color='secondary' />;
     }
 
     return (

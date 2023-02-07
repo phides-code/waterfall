@@ -34,5 +34,5 @@ const Wrapper = styled('div')(({ theme }) => ({
 }));
 
 const InnerWrapper = styled('div')(() => ({
-    width: '24rem',
+    maxWidth: '24rem',
 }));

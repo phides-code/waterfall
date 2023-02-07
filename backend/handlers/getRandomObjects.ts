@@ -5,7 +5,7 @@ interface ObjectList {
     objectIDs: number[];
 }
 
-const NUM_OF_OBJECTS = 2;
+const NUM_OF_OBJECTS = 4;
 
 const fetchObject = async (objectID: number) => {
     const response = await fetch(
@@ -25,7 +25,7 @@ const fetchRandomObjects = async (allObjects: ObjectList) => {
 
         const result = await fetchObject(objectIDs[randomIndex]);
 
-        // if this result has already been added or if doesn't have a primaryImageSmall, pick again
+        // if this result has already been added or if doesn't have a valid primaryImageSmall url, pick again
         if (
             result.primaryImageSmall !== null &&
             typeof result.primaryImageSmall === 'string' &&
