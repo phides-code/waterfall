@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { RandomObject } from '../shared/types';
+import fetch from 'node-fetch';
 
 interface ObjectList {
     total: number;
@@ -24,7 +25,9 @@ const fetchRandomObjects = async (allObjects: ObjectList) => {
     for (let i = 0; i < NUM_OF_OBJECTS; i++) {
         const randomIndex = Math.floor(Math.random() * total);
 
-        const result: RandomObject = await fetchObject(objectIDs[randomIndex]);
+        const result = (await fetchObject(
+            objectIDs[randomIndex]
+        )) as RandomObject;
 
         // if this result has already been added or if doesn't have a valid primaryImageSmall url, pick again
         if (
@@ -61,7 +64,7 @@ const getRandomObjects = async (req: Request, res: Response) => {
             `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&departmentId=${departmentId}&q=""`
         );
 
-        const allObjects: ObjectList = await fetchResponse.json();
+        const allObjects = (await fetchResponse.json()) as ObjectList;
 
         // do a fetch on each number and get back an array
         const randomObjects = await fetchRandomObjects(allObjects);
