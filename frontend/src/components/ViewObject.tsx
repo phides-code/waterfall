@@ -12,6 +12,7 @@ const ViewObject = () => {
     const object = useAppSelector(selectObject);
 
     const objectStatus = object.status;
+    const objectHttpStatus = object.value.httpStatus;
     const objectData = object.value.data;
 
     useEffect(() => {
@@ -22,7 +23,7 @@ const ViewObject = () => {
         return <CircularProgress color='secondary' />;
     }
 
-    if (objectStatus === 'failed') {
+    if (objectStatus === 'failed' || objectHttpStatus !== 200) {
         return <div>Something went wrong. Please reload.</div>;
     }
 

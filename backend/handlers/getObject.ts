@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { RandomObject } from '../shared/types';
-import fetch from 'node-fetch';
+import axios from 'axios';
 
 const getObject = async (req: Request, res: Response) => {
     const { objectId } = req.params;
@@ -8,11 +8,11 @@ const getObject = async (req: Request, res: Response) => {
     console.log('got objectId: ' + objectId);
 
     try {
-        const fetchResponse = await fetch(
+        const axiosResponse = await axios.get(
             `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`
         );
 
-        const object = (await fetchResponse.json()) as RandomObject;
+        const object = (await axiosResponse.data) as RandomObject;
 
         return res.status(200).json({
             httpStatus: 200,

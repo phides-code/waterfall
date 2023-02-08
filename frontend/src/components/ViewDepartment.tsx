@@ -21,6 +21,7 @@ const ViewDepartment = () => {
         selectDepartmentById(state, departmentIdNumber)
     );
     const randomObjectsStatus = randomObjects.status;
+    const randomObjectsHttpStatus = randomObjects.value.httpStatus;
     const randomObjectsData = randomObjects.value.data;
 
     useEffect(() => {
@@ -37,7 +38,7 @@ const ViewDepartment = () => {
         return <CircularProgress color='secondary' />;
     }
 
-    if (randomObjectsStatus === 'failed') {
+    if (randomObjectsStatus === 'failed' || randomObjectsHttpStatus !== 200) {
         return <div>Something went wrong. Please reload.</div>;
     }
 

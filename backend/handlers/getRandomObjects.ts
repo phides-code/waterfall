@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { RandomObject } from '../shared/types';
-import fetch from 'node-fetch';
+import axios from 'axios';
 
 interface ObjectList {
     total: number;
@@ -9,12 +9,12 @@ interface ObjectList {
 
 const NUM_OF_OBJECTS = 4;
 
-const fetchObject = async (objectID: number) => {
-    const response = await fetch(
-        `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
+const fetchObject = async (objectId: number) => {
+    const response = await axios.get(
+        `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`
     );
 
-    return await response.json();
+    return await response.data;
 };
 
 const fetchRandomObjects = async (allObjects: ObjectList) => {
@@ -57,14 +57,14 @@ const getRandomObjects = async (req: Request, res: Response) => {
 
     try {
         // get all objectIDs for given department
-        // const fetchResponse = await fetch(
+
         //     `https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&hasImages=true&departmentId=${departmentId}&q=""`
-        // );
-        const fetchResponse = await fetch(
+
+        const axiosResponse = await axios.get(
             `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&departmentId=${departmentId}&q=""`
         );
 
-        const allObjects = (await fetchResponse.json()) as ObjectList;
+        const allObjects = (await axiosResponse.data) as ObjectList;
 
         // do a fetch on each number and get back an array
         const randomObjects = await fetchRandomObjects(allObjects);
