@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { MongoClient, MongoClientOptions } from 'mongodb';
 import * as dotenv from 'dotenv';
-import { Department } from '../../shared/types';
+import { Department } from '../shared/types';
 
 dotenv.config();
 

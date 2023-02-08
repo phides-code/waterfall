@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { RandomObject } from '../../shared/types';
+import { RandomObject } from '../shared/types';
 
 const getObject = async (req: Request, res: Response) => {
     const { objectId } = req.params;

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { RandomObject } from '../../../../shared/types';
+import { RandomObject } from '../../../../backend/shared/types';
 
 interface FetchResponseType {
     httpStatus: number;

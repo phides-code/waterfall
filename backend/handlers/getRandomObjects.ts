@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { RandomObject } from '../../shared/types';
+import { RandomObject } from '../shared/types';
 
 interface ObjectList {
     total: number;
