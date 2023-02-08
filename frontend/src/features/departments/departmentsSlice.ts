@@ -1,11 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-
-export interface Department {
-    departmentId: number;
-    displayName: string;
-    picture: string;
-}
+import { Department } from '../../../../shared/types';
 
 interface FetchResponseType {
     httpStatus: number;

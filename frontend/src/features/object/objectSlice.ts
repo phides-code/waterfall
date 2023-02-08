@@ -1,48 +1,46 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
 import { RandomObject } from '../../../../shared/types';
+import { RootState } from '../../app/store';
 
 interface FetchResponseType {
     httpStatus: number;
-    data: RandomObject[];
+    data: RandomObject | null;
 }
 
-export interface RandomObjectsState {
+export interface ObjectState {
     value: FetchResponseType;
     status: 'idle' | 'loading' | 'failed';
 }
 
-const initialState: RandomObjectsState = {
-    value: { httpStatus: 200, data: [] },
+const initialState: ObjectState = {
+    value: { httpStatus: 200, data: null },
     status: 'idle',
 };
 
-export const fetchRandomObjects = createAsyncThunk(
-    'randomObjects/fetchRandomObjects',
+export const fetchObject = createAsyncThunk(
+    'object/fetchObject',
 
-    async (departmentId: number) => {
-        const rawFetchResponse = await fetch(
-            `/api/getrandomobjects/${departmentId}`
-        );
+    async (objectId: number) => {
+        const rawFetchResponse = await fetch(`/api/getobject/${objectId}`);
         const fetchResponse: FetchResponseType = await rawFetchResponse.json();
 
         return fetchResponse;
     }
 );
 
-export const randomObjectsSlice = createSlice({
-    name: 'randomObjects',
+export const objectSlice = createSlice({
+    name: 'object',
     initialState,
     reducers: {},
     extraReducers(builder) {
         builder
-            .addCase(fetchRandomObjects.pending, (state) => {
+            .addCase(fetchObject.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchRandomObjects.rejected, (state) => {
+            .addCase(fetchObject.rejected, (state) => {
                 state.status = 'failed';
             })
-            .addCase(fetchRandomObjects.fulfilled, (state, action) => {
+            .addCase(fetchObject.fulfilled, (state, action) => {
                 const { httpStatus, data } = action.payload;
                 state.status = 'idle';
                 state.value = {
@@ -53,6 +51,6 @@ export const randomObjectsSlice = createSlice({
     },
 });
 
-export const selectRandomObjects = (state: RootState) => state.randomObjects;
+export const selectObject = (state: RootState) => state.object;
 
-export default randomObjectsSlice.reducer;
+export default objectSlice.reducer;

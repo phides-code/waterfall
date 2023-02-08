@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { RandomObject } from '../../shared/types';
 
 interface ObjectList {
     total: number;
@@ -18,12 +19,12 @@ const fetchObject = async (objectID: number) => {
 const fetchRandomObjects = async (allObjects: ObjectList) => {
     const { total, objectIDs } = allObjects;
     console.log('getting ' + NUM_OF_OBJECTS + ' of ' + total + ' objects...');
-    const randomObjects: any[] = [];
+    const randomObjects: RandomObject[] = [];
 
     for (let i = 0; i < NUM_OF_OBJECTS; i++) {
         const randomIndex = Math.floor(Math.random() * total);
 
-        const result = await fetchObject(objectIDs[randomIndex]);
+        const result: RandomObject = await fetchObject(objectIDs[randomIndex]);
 
         // if this result has already been added or if doesn't have a valid primaryImageSmall url, pick again
         if (

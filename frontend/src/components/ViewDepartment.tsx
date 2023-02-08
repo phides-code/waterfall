@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
     fetchRandomObjects,
@@ -37,21 +37,28 @@ const ViewDepartment = () => {
         return <CircularProgress color='secondary' />;
     }
 
+    if (randomObjectsStatus === 'failed') {
+        return <div>Something went wrong. Please reload.</div>;
+    }
+
     return (
         <Wrapper>
             <h2>{departmentName}</h2>
             <div>
                 {randomObjectsData.map((object) => (
-                    <div>
+                    <StyledLink
+                        to={`/object/${object.objectID}`}
+                        key={object.objectID}
+                    >
                         <ObjectImage
-                            key={object.objectID}
                             alt={object.title}
                             src={object.primaryImageSmall}
                         />
                         <div>{object.title}</div>
                         <div>{object.artistDisplayName}</div>
                         <div>{object.objectDate}</div>
-                    </div>
+                        <div>{object.county}</div>
+                    </StyledLink>
                 ))}
             </div>
         </Wrapper>
@@ -62,6 +69,11 @@ const Wrapper = styled('div')(() => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
+}));
+
+const StyledLink = styled(Link)(() => ({
+    color: 'white',
+    textDecoration: 'none',
 }));
 
 const ObjectImage = styled('img')(() => ({

@@ -3,6 +3,7 @@ import counterReducer from '../features/counter/counterSlice';
 import categoryReducer from '../features/category/categorySlice';
 import departmentsReducer from '../features/departments/departmentsSlice';
 import randomObjectsReducer from '../features/randomObjects/randomObjectsSlice';
+import objectReducer from '../features/object/objectSlice';
 
 export const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
         category: categoryReducer,
         departments: departmentsReducer,
         randomObjects: randomObjectsReducer,
+        object: objectReducer,
     },
 });
 

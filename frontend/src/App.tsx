@@ -4,6 +4,7 @@ import Header from './app/components/Header';
 import Departments from './app/components/Departments';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ViewDepartment from './components/ViewDepartment';
+import ViewObject from './components/ViewObject';
 
 const App = () => {
     return (
@@ -16,6 +17,10 @@ const App = () => {
                         <Route
                             path='/department/:departmentId'
                             element={<ViewDepartment />}
+                        />
+                        <Route
+                            path='/object/:objectId'
+                            element={<ViewObject />}
                         />
                     </Routes>
                 </BrowserRouter>

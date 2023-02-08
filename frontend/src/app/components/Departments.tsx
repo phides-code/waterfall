@@ -16,7 +16,6 @@ const Departments = () => {
     const isLoading = departmentsObject.status === 'loading';
 
     useEffect(() => {
-        console.log('fetching departments');
         dispatch(fetchDepartments());
     }, [dispatch]);
 
@@ -30,17 +29,22 @@ const Departments = () => {
 
             <Wrapper>
                 {departments.map((department) => (
-                    <Link
+                    <StyledLink
                         to={`/department/${department.departmentId}`}
                         key={department.departmentId}
                     >
                         <DepartmentIcon department={department} />
-                    </Link>
+                    </StyledLink>
                 ))}
             </Wrapper>
         </div>
     );
 };
+
+const StyledLink = styled(Link)(() => ({
+    color: 'white',
+    textDecoration: 'none',
+}));
 
 const Wrapper = styled('div')(() => ({
     display: 'flex',

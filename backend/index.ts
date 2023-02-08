@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import path from 'path';
 import getDepartments from './handlers/getDepartments';
 import getRandomObjects from './handlers/getRandomObjects';
+import getObject from './handlers/getObject';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.static(path.resolve(__dirname, '../../frontend/build')));
 
 app.get('/api/getdepartments', getDepartments);
 app.get('/api/getrandomobjects/:departmentId', getRandomObjects);
+app.get('/api/getobject/:objectId', getObject);
 
 app.get('*', (req: Request, res: Response) => {
     res.sendFile(path.resolve(__dirname, '../../frontend/build', 'index.html'));

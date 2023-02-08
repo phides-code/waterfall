@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { MongoClient, MongoClientOptions } from 'mongodb';
 import * as dotenv from 'dotenv';
+import { Department } from '../../shared/types';
 
 dotenv.config();
 
@@ -21,8 +22,8 @@ const getDepartments = async (req: Request, res: Response) => {
         const db = client.db(dbName);
         console.log('Connected to DB: ' + dbName);
 
-        const departments = await db
-            .collection(collectionName)
+        const departments: Department[] = await db
+            .collection<Department>(collectionName)
             .find()
             .toArray();
 
