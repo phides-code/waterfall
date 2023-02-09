@@ -37,7 +37,7 @@ const ViewObject = () => {
                 <div>{objectData?.title}</div>
                 <div>{objectData?.artistDisplayName}</div>
                 <div>{objectData?.objectDate}</div>
-                <div>{objectData?.county}</div>
+                <div>{objectData?.country}</div>
             </div>
         </div>
     );

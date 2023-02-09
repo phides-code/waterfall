@@ -47,24 +47,30 @@ const ViewDepartment = () => {
             <h2>{departmentName}</h2>
             <div>
                 {randomObjectsData.map((object) => (
-                    <StyledLink
-                        to={`/object/${object.objectID}`}
-                        key={object.objectID}
-                    >
-                        <ObjectImage
-                            alt={object.title}
-                            src={object.primaryImageSmall}
-                        />
-                        <div>{object.title}</div>
-                        <div>{object.artistDisplayName}</div>
-                        <div>{object.objectDate}</div>
-                        <div>{object.county}</div>
-                    </StyledLink>
+                    <ObjectWrapper>
+                        <StyledLink
+                            to={`/object/${object.objectID}`}
+                            key={object.objectID}
+                        >
+                            <ObjectImage
+                                alt={object.title}
+                                src={object.primaryImageSmall}
+                            />
+                            <div>{object.title}</div>
+                            <div>{object.artistDisplayName}</div>
+                            <div>{object.objectDate}</div>
+                            <div>{object.country}</div>
+                        </StyledLink>
+                    </ObjectWrapper>
                 ))}
             </div>
         </Wrapper>
     );
 };
+
+const ObjectWrapper = styled('div')(() => ({
+    marginBottom: '1rem',
+}));
 
 const Wrapper = styled('div')(() => ({
     display: 'flex',
