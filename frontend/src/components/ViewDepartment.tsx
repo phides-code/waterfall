@@ -47,11 +47,8 @@ const ViewDepartment = () => {
             <h2>{departmentName}</h2>
             <div>
                 {randomObjectsData.map((object) => (
-                    <ObjectWrapper>
-                        <StyledLink
-                            to={`/object/${object.objectID}`}
-                            key={object.objectID}
-                        >
+                    <ObjectWrapper key={object.objectID}>
+                        <StyledLink to={`/object/${object.objectID}`}>
                             <ObjectImage
                                 alt={object.title}
                                 src={object.primaryImageSmall}
