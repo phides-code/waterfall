@@ -1,5 +1,6 @@
 import { styled } from '@mui/material';
 import { RGBValue } from './ViewObject';
+import { useState } from 'react';
 
 interface ColorPaletteProps {
     rgbArray: RGBValue[];
@@ -12,9 +13,11 @@ export interface HSLValue {
 }
 
 const ColorPalette = ({ rgbArray }: ColorPaletteProps) => {
+    const [paletteExpand, setPaletteExpand] = useState<boolean>(false);
+
     // credit https://github.com/zygisS22/color-palette-extraction
-    const MAX_DEPTH = 4;
-    const QUANTIZATION_DEFAULT_DEPTH = 1;
+    const MAX_DEPTH = 3;
+    const QUANTIZATION_DEFAULT_DEPTH = 0;
 
     //  Convert each pixel value ( number ) to hexadecimal ( string ) with base 16
     const rgbToHex = (pixel: RGBValue): string => {
@@ -74,6 +77,11 @@ const ColorPalette = ({ rgbArray }: ColorPaletteProps) => {
     };
 
     const quantization = (rgbValues: RGBValue[], depth: number): RGBValue[] => {
+        /**
+         * Color quantization
+         * A process that reduces the number of colors used in an image
+         * while trying to visually maintin the original image as much as possible
+         */
         // Base case
         if (depth === MAX_DEPTH || rgbValues.length === 0) {
             const color = rgbValues.reduce(
@@ -131,11 +139,6 @@ const ColorPalette = ({ rgbArray }: ColorPaletteProps) => {
         });
     };
 
-    /**
-     * Color quantization
-     * A process that reduces the number of colors used in an image
-     * while trying to visually maintin the original image as much as possible
-     */
     const quantColors = quantization(rgbArray, QUANTIZATION_DEFAULT_DEPTH);
 
     const orderedByLuminance = orderByLuminance(quantColors);
@@ -144,8 +147,14 @@ const ColorPalette = ({ rgbArray }: ColorPaletteProps) => {
         rgbToHex(rgbElement)
     );
     //////////////////////////////////////////////////////////////////////
+
     return (
-        <Wrapper>
+        <Wrapper
+            paletteExpand={paletteExpand}
+            onClick={() => {
+                setPaletteExpand((paletteExpand) => !paletteExpand);
+            }}
+        >
             {hexValues.map((hexValue, i) => (
                 <ColorSquare
                     key={`item-${Date.now()}-${i}`}
@@ -156,12 +165,16 @@ const ColorPalette = ({ rgbArray }: ColorPaletteProps) => {
     );
 };
 
-const Wrapper = styled('div')(() => ({
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: '2rem',
-    marginBottom: '2rem',
-}));
+const Wrapper = styled('div')(
+    ({ paletteExpand }: { paletteExpand: boolean }) => ({
+        display: 'flex',
+        flexDirection: paletteExpand ? 'column' : 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '1rem',
+        marginBottom: '1rem',
+    })
+);
 
 const ColorSquare = styled('div')(({ hexValue }: { hexValue: string }) => ({
     backgroundColor: hexValue,

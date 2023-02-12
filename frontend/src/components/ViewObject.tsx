@@ -56,7 +56,7 @@ const ViewObject = () => {
         }
 
         const image = new Image();
-        image.crossOrigin = 'Anonymous';
+        image.crossOrigin = 'anonymous';
 
         image.src = objectData?.primaryImageSmall as string;
 
