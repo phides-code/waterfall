@@ -53,7 +53,9 @@ const ViewDepartment = () => {
                                 alt={object.title}
                                 src={object.primaryImageSmall}
                             />
-                            <div>{object.title}</div>
+                            <div>
+                                <i>{object.title}</i>
+                            </div>
                             <div>{object.artistDisplayName}</div>
                             <div>{object.objectDate}</div>
                             <div>{object.country}</div>
