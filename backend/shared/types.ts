@@ -32,6 +32,7 @@ export interface Tag {
 }
 
 export interface RandomObject {
+    palette?: string[];
     objectID?: number;
     isHighlight?: boolean;
     accessionNumber?: string;

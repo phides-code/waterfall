@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { RandomObject } from '../shared/types';
 import axios from 'axios';
-import getImageData from './getImageData';
+import getPalette from './getPalette';
 
 const getObject = async (req: Request, res: Response) => {
     const { objectId } = req.params;
@@ -14,8 +14,8 @@ const getObject = async (req: Request, res: Response) => {
         );
 
         const object = (await axiosResponse.data) as RandomObject;
-
-        getImageData(object.primaryImageSmall as string);
+        const palette = await getPalette(object.primaryImageSmall as string);
+        object.palette = palette;
 
         return res.status(200).json({
             httpStatus: 200,
