@@ -60,7 +60,6 @@ const ViewObject = () => {
 
         image.src = objectData?.primaryImageSmall as string;
 
-        // credit https://github.com/zygisS22/color-palette-extraction
         image.onload = () => {
             const aspectRatio = image.naturalWidth / image.naturalHeight;
             let canvasWidth = Math.min(image.naturalWidth, maxCanvasWidth);
@@ -80,7 +79,6 @@ const ViewObject = () => {
             );
 
             setRgbArray(buildRgb(imageData));
-            ////////////////////////////////////////////////////////////////
         };
     }, [objectData?.primaryImageSmall]);
 
