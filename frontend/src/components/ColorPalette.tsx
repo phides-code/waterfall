@@ -1,5 +1,6 @@
 import { styled } from '@mui/material';
 import { useState } from 'react';
+import { contrastColor } from 'contrast-color';
 
 interface ColorPaletteProps {
     palette: string[];
@@ -12,15 +13,25 @@ const ColorPalette = ({ palette }: ColorPaletteProps) => {
         <Wrapper
             paletteExpand={paletteExpand}
             onClick={() => {
-                setPaletteExpand((paletteExpand) => !paletteExpand);
+                if (!paletteExpand) {
+                    setPaletteExpand(true);
+                }
             }}
         >
-            {palette?.map((hexValue, i) => (
-                <ColorSquare
-                    key={`item-${Date.now()}-${i}`}
-                    hexValue={hexValue}
-                />
-            ))}
+            {palette?.map((hexValue, i) => {
+                const textColor = contrastColor({ bgColor: hexValue });
+                return (
+                    <ColorSquare
+                        key={`item-${Date.now()}-${i}`}
+                        hexValue={hexValue}
+                        paletteExpand={paletteExpand}
+                    >
+                        {paletteExpand && (
+                            <HexCode color={textColor}>{hexValue}</HexCode>
+                        )}
+                    </ColorSquare>
+                );
+            })}
         </Wrapper>
     );
 };
@@ -36,10 +47,22 @@ const Wrapper = styled('div')(
     })
 );
 
-const ColorSquare = styled('div')(({ hexValue }: { hexValue: string }) => ({
-    backgroundColor: hexValue,
-    height: '2rem',
-    width: '2rem',
+const ColorSquare = styled('div')(
+    ({
+        hexValue,
+        paletteExpand,
+    }: {
+        hexValue: string;
+        paletteExpand: boolean;
+    }) => ({
+        backgroundColor: hexValue,
+        height: '2rem',
+        width: paletteExpand ? '8rem' : '2rem',
+    })
+);
+
+const HexCode = styled('span')(({ color }: { color: string }) => ({
+    color: color,
 }));
 
 export default ColorPalette;
