@@ -21,20 +21,25 @@ const ColorPalette = ({ palette }: ColorPaletteProps) => {
             {palette?.map((hexValue, i) => {
                 const textColor = contrastColor({ bgColor: hexValue });
                 return (
-                    <ColorSquare
-                        key={`item-${Date.now()}-${i}`}
-                        hexValue={hexValue}
-                        paletteExpand={paletteExpand}
-                    >
-                        {paletteExpand && (
-                            <HexCode color={textColor}>{hexValue}</HexCode>
-                        )}
-                    </ColorSquare>
+                    <ColorSquareWrapper key={`item-${Date.now()}-${i}`}>
+                        <ColorSquare
+                            hexValue={hexValue}
+                            paletteExpand={paletteExpand}
+                        >
+                            {paletteExpand && (
+                                <HexCode color={textColor}>{hexValue}</HexCode>
+                            )}
+                        </ColorSquare>
+                    </ColorSquareWrapper>
                 );
             })}
         </Wrapper>
     );
 };
+
+const ColorSquareWrapper = styled('div')(() => ({
+    display: 'flex',
+}));
 
 const Wrapper = styled('div')(
     ({ paletteExpand }: { paletteExpand: boolean }) => ({
@@ -55,6 +60,9 @@ const ColorSquare = styled('div')(
         hexValue: string;
         paletteExpand: boolean;
     }) => ({
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
         backgroundColor: hexValue,
         height: '2rem',
         width: paletteExpand ? '8rem' : '2rem',

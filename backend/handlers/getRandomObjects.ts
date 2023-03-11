@@ -29,8 +29,13 @@ const fetchRandomObjects = async (allObjects: ObjectList) => {
             objectIDs[randomIndex]
         )) as RandomObject;
 
-        // if this result has already been added or if doesn't have a valid primaryImageSmall url, pick again
+        // if this result has already been added or if doesn't have a valid primaryImage url, pick again
         if (
+            result.primaryImage !== null &&
+            typeof result.primaryImage === 'string' &&
+            /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(
+                result.primaryImage
+            ) &&
             result.primaryImageSmall !== null &&
             typeof result.primaryImageSmall === 'string' &&
             /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(
@@ -38,7 +43,7 @@ const fetchRandomObjects = async (allObjects: ObjectList) => {
             )
         ) {
             console.log('adding random object to array position ' + i);
-            console.log('got primaryImageSmall: ' + result.primaryImageSmall);
+            console.log('got primaryImage: ' + result.primaryImage);
             randomObjects.push(result);
         } else {
             console.log('*** redoing random selection ***');

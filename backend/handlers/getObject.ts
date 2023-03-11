@@ -14,7 +14,7 @@ const getObject = async (req: Request, res: Response) => {
         );
 
         const object = (await axiosResponse.data) as RandomObject;
-        const palette = await getPalette(object.primaryImageSmall as string);
+        const palette = await getPalette(object.primaryImage as string);
         object.palette = palette;
 
         return res.status(200).json({

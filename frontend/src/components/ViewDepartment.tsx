@@ -73,6 +73,7 @@ const ObjectWrapper = styled('div')(() => ({
 
 const Wrapper = styled('div')(() => ({
     display: 'flex',
+    flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'center',
 }));

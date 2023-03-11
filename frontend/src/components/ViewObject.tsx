@@ -28,9 +28,9 @@ const ViewObject = () => {
     }
 
     return (
-        <div>
+        <Wrapper>
             <ObjectImage
-                src={objectData?.primaryImageSmall}
+                src={objectData?.primaryImage}
                 alt={objectData?.title}
             />
             <div>
@@ -40,9 +40,14 @@ const ViewObject = () => {
             <div>{objectData?.objectDate}</div>
             <div>{objectData?.country}</div>
             <ColorPalette palette={objectData?.palette as string[]} />
-        </div>
+        </Wrapper>
     );
 };
+
+const Wrapper = styled('div')(() => ({
+    display: 'flex',
+    flexDirection: 'column',
+}));
 
 const ObjectImage = styled('img')(() => ({
     maxWidth: '24rem',
