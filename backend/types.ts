@@ -1,5 +1,4 @@
 export interface Department {
-    _id: string;
     departmentId: number;
     displayName: string;
     picture: string;
