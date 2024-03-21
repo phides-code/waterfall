@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { RandomObject } from '../shared/types';
+import { RandomObject } from '../types';
 import axios from 'axios';
 import getPalette from './getPalette';
 

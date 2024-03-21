@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
@@ -6,29 +6,25 @@ import {
     selectRandomObjects,
 } from '../features/randomObjects/randomObjectsSlice';
 import { CircularProgress, styled } from '@mui/material';
-import {
-    fetchDepartments,
-    selectDepartmentById,
-} from '../features/departments/departmentsSlice';
+import { DepartmentContext } from '../DepartmentContext';
+import { Department } from '../app/types';
 
 const ViewDepartment = () => {
     const { departmentId } = useParams();
     const departmentIdNumber = parseInt(departmentId as string);
     const dispatch = useAppDispatch();
 
+    const { getDepartmentById } = useContext(DepartmentContext);
+
     const randomObjects = useAppSelector(selectRandomObjects);
-    const departmentName = useAppSelector((state) =>
-        selectDepartmentById(state, departmentIdNumber)
-    );
+
+    const department = getDepartmentById(departmentIdNumber) as Department;
+
+    const departmentName = department.displayName;
+
     const randomObjectsStatus = randomObjects.status;
     const randomObjectsHttpStatus = randomObjects.value.httpStatus;
     const randomObjectsData = randomObjects.value.data;
-
-    useEffect(() => {
-        if (!departmentName) {
-            dispatch(fetchDepartments());
-        }
-    }, [departmentName, dispatch]);
 
     useEffect(() => {
         dispatch(fetchRandomObjects(departmentIdNumber));

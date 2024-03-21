@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { Department } from '../../../backend/shared/types';
+import { Department } from '../app/types';
 
 interface DepartmentIconProps {
     department: Department;

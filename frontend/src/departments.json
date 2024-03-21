@@ -1,0 +1,110 @@
+[
+    {
+        "_id": "63d87bd6571e3d9f855b3877",
+        "departmentId": 7,
+        "displayName": "The Cloisters",
+        "picture": "https://images.metmuseum.org/CRDImages/cl/web-large/DT4035.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b3878",
+        "departmentId": 8,
+        "displayName": "The Costume Institute",
+        "picture": "https://images.metmuseum.org/CRDImages/ci/web-large/DP-26331-001.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b3872",
+        "departmentId": 5,
+        "displayName": "Arts of Africa, Oceania, and the Americas",
+        "picture": "https://images.metmuseum.org/CRDImages/ao/web-large/DP18456.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b3879",
+        "departmentId": 6,
+        "displayName": "Asian Art",
+        "picture": "https://images.metmuseum.org/CRDImages/as/web-large/DP-15190-001.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b387e",
+        "departmentId": 16,
+        "displayName": "The Libraries",
+        "picture": "https://images.metmuseum.org/CRDImages/li/web-large/i19549167-cf.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b3882",
+        "departmentId": 18,
+        "displayName": "Musical Instruments",
+        "picture": "https://images.metmuseum.org/CRDImages/mi/web-large/DP-21582-001.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b3874",
+        "departmentId": 1,
+        "displayName": "American Decorative Arts",
+        "picture": "https://images.metmuseum.org/CRDImages/ad/web-large/ADA4495.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b3875",
+        "departmentId": 4,
+        "displayName": "Arms and Armor",
+        "picture": "https://images.metmuseum.org/CRDImages/aa/web-large/sfsb14.25.1408ab%28111510%29s1s2.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b3876",
+        "departmentId": 9,
+        "displayName": "Drawings and Prints",
+        "picture": "https://images.metmuseum.org/CRDImages/dp/web-large/DP837455.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b387b",
+        "departmentId": 11,
+        "displayName": "European Paintings",
+        "picture": "https://images.metmuseum.org/CRDImages/ep/web-large/DP323394.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b387c",
+        "departmentId": 15,
+        "displayName": "The Robert Lehman Collection",
+        "picture": "https://images.metmuseum.org/CRDImages/rl/web-large/DT3055.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b3880",
+        "departmentId": 17,
+        "displayName": "Medieval Art",
+        "picture": "https://images.metmuseum.org/CRDImages/md/web-large/DP134383.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b3873",
+        "departmentId": 3,
+        "displayName": "Ancient Near Eastern Art",
+        "picture": "https://images.metmuseum.org/CRDImages/an/web-large/DT913.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b387a",
+        "departmentId": 10,
+        "displayName": "Egyptian Art",
+        "picture": "https://images.metmuseum.org/CRDImages/eg/web-large/LC-2021_41_34_EGDP032381.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b387d",
+        "departmentId": 12,
+        "displayName": "European Sculpture and Decorative Arts",
+        "picture": "https://images.metmuseum.org/CRDImages/es/web-large/31.310_CP4.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b387f",
+        "departmentId": 14,
+        "displayName": "Islamic Art",
+        "picture": "https://images.metmuseum.org/CRDImages/is/web-large/sf-x-110.jpg"
+    },
+    {
+        "_id": "63d87bd6571e3d9f855b3881",
+        "departmentId": 13,
+        "displayName": "Greek and Roman Art",
+        "picture": "https://images.metmuseum.org/CRDImages/gr/web-large/LC-74_51_464.jpg"
+    },
+    {
+        "_id": "63e049780d60fa3f5221e3df",
+        "departmentId": 19,
+        "displayName": "Photographs",
+        "picture": "https://images.metmuseum.org/CRDImages/ph/web-large/DP295210.jpg"
+    }
+]
