@@ -18,10 +18,6 @@ const Wrapper = styled('div')(() => ({
 const StyledLink = styled(Link)(() => ({
     color: 'white',
     textDecoration: 'none',
-
-    // '&:active': {
-    //     color: 'red',
-    // },
 }));
 
 export default Header;

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchObject, selectObject } from '../features/object/objectSlice';
 import { CircularProgress, styled } from '@mui/material';
 import ColorPalette from './ColorPalette';
+import { RandomObject } from '../app/types';
 
 const ViewObject = () => {
     const { objectId } = useParams();
@@ -12,18 +13,17 @@ const ViewObject = () => {
     const object = useAppSelector(selectObject);
 
     const objectStatus = object.status;
-    const objectHttpStatus = object.value.httpStatus;
-    const objectData = object.value.data;
+    const objectData = object.value.data as RandomObject;
 
     useEffect(() => {
         dispatch(fetchObject(objectIdNumber));
     }, [objectIdNumber, dispatch]);
 
-    if (objectStatus === 'loading') {
+    if (objectStatus === 'loading' || !objectData) {
         return <CircularProgress color='secondary' />;
     }
 
-    if (objectStatus === 'failed' || objectHttpStatus !== 200) {
+    if (objectStatus === 'failed') {
         return <div>Something went wrong. Please reload.</div>;
     }
 

@@ -7,7 +7,7 @@ import {
 } from '../features/randomObjects/randomObjectsSlice';
 import { CircularProgress, styled } from '@mui/material';
 import { DepartmentContext } from '../DepartmentContext';
-import { Department } from '../app/types';
+import { Department, RandomObject } from '../app/types';
 
 const ViewDepartment = () => {
     const { departmentId } = useParams();
@@ -23,18 +23,17 @@ const ViewDepartment = () => {
     const departmentName = department.displayName;
 
     const randomObjectsStatus = randomObjects.status;
-    const randomObjectsHttpStatus = randomObjects.value.httpStatus;
-    const randomObjectsData = randomObjects.value.data;
+    const randomObjectsData = randomObjects.value.data as RandomObject[];
 
     useEffect(() => {
         dispatch(fetchRandomObjects(departmentIdNumber));
     }, [departmentIdNumber, dispatch]);
 
-    if (randomObjectsStatus === 'loading') {
+    if (randomObjectsStatus === 'loading' || !randomObjectsData) {
         return <CircularProgress color='secondary' />;
     }
 
-    if (randomObjectsStatus === 'failed' || randomObjectsHttpStatus !== 200) {
+    if (randomObjectsStatus === 'failed') {
         return <div>Something went wrong. Please reload.</div>;
     }
 

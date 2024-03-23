@@ -3,8 +3,8 @@ import { RootState } from '../../app/store';
 import { RandomObject } from '../../app/types';
 
 interface FetchResponseType {
-    httpStatus: number;
-    data: RandomObject | null;
+    data?: RandomObject;
+    error?: string;
 }
 
 export interface ObjectState {
@@ -13,7 +13,7 @@ export interface ObjectState {
 }
 
 const initialState: ObjectState = {
-    value: { httpStatus: 200, data: null },
+    value: {},
     status: 'idle',
 };
 
@@ -21,7 +21,8 @@ export const fetchObject = createAsyncThunk(
     'object/fetchObject',
 
     async (objectId: number) => {
-        const rawFetchResponse = await fetch(`/api/getobject/${objectId}`);
+        const SERVICE_URL = process.env.REACT_APP_SERVICE_URL as string;
+        const rawFetchResponse = await fetch(`${SERVICE_URL}/${objectId}`);
         const fetchResponse: FetchResponseType = await rawFetchResponse.json();
 
         return fetchResponse;
@@ -41,10 +42,10 @@ export const objectSlice = createSlice({
                 state.status = 'failed';
             })
             .addCase(fetchObject.fulfilled, (state, action) => {
-                const { httpStatus, data } = action.payload;
+                const { error, data } = action.payload;
                 state.status = 'idle';
                 state.value = {
-                    httpStatus,
+                    error,
                     data,
                 };
             });
