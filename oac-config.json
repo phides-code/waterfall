@@ -1,6 +1,0 @@
-{
-    "Name": "waterfall-b52bbbd8-oac",
-    "SigningProtocol": "sigv4",
-    "SigningBehavior": "always",
-    "OriginAccessControlOriginType": "s3"
-}
