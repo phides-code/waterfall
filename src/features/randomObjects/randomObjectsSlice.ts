@@ -22,7 +22,6 @@ export const fetchRandomObjects = createAsyncThunk(
 
     async (departmentId: number) => {
         const SERVICE_URL = process.env.REACT_APP_SERVICE_URL as string;
-        console.log('SERVICE_URL:', SERVICE_URL);
         const rawFetchResponse = await fetch(
             `${SERVICE_URL}/random/${departmentId}`
         );
