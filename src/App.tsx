@@ -1,4 +1,5 @@
 import { styled } from '@mui/material';
+// @ts-ignore: allow side-effect CSS import without type declarations
 import './App.css';
 import Header from './app/components/Header';
 import Departments from './app/components/Departments';
